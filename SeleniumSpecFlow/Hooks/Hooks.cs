@@ -27,6 +27,7 @@ namespace SeleniumSpecFlow.Hooks
         {
             IWebDriver driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             _container.RegisterInstanceAs<IWebDriver>(driver);
             _scenario = _feature.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
         }

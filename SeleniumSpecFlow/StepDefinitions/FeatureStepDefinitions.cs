@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using SeleniumSpecFlow.Pages;
 using TechTalk.SpecFlow.Assist;
 
 namespace SeleniumSpecFlow.StepDefinitions
@@ -7,6 +8,8 @@ namespace SeleniumSpecFlow.StepDefinitions
     internal sealed class FeatureStepDefinitions
     {
         private IWebDriver driver;
+        private SearchPage searchPage;
+        private ResultPage resultPage;
 
         public FeatureStepDefinitions(IWebDriver driver) 
         {
@@ -21,15 +24,15 @@ namespace SeleniumSpecFlow.StepDefinitions
         [When(@"Enter the URL")]
         public void WhenEnterTheURL()
         {
-            driver.Url = "https://youtube.com";
+            driver.Navigate().GoToUrl("https://youtube.com");
         }
 
         [Then(@"Search for the Testers Talk")]
         public void ThenSearchForTheTestersTalk()
         {
-            driver.FindElement(By.XPath("//input[@id='search']")).SendKeys("Testers Talk");
-            driver.FindElement(By.XPath("//input[@id='search']")).SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
+            searchPage = new SearchPage(driver);
+            resultPage = searchPage.SearchText("Testers Talk");
+            Thread.Sleep(3000);
         }
 
         [Then(@"Search for the Testers Talk in a wrong Xpath")]
@@ -49,6 +52,7 @@ namespace SeleniumSpecFlow.StepDefinitions
         }
 
         [Then(@"Search for the following")]
+        [When(@"Search for the following")]
         public void ThenSearchForTheFollowing(Table table)
         {
             var searchCriteria = table.CreateSet<SearchTextTestData>();
@@ -61,6 +65,13 @@ namespace SeleniumSpecFlow.StepDefinitions
                 Thread.Sleep(4000);
             });
         }
+
+        [Then(@"Validate the title contains ""([^""]*)""")]
+        public void ThenValidateTheTitleContains(string text)
+        {
+            resultPage.GetTitle().Should().Contain(text);
+        }
+
     }
 
     public class SearchTextTestData

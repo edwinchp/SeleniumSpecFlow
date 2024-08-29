@@ -10,6 +10,7 @@
     <SpecFlowObsoleteCodeBehindFiles Remove="Features\Feature1 - Copia.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Features\Feature2 - Copy.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Features\Feature3 - Copy.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Features\Feature4 - Copy.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Features\Feature5.feature.cs">
+      <DependentUpon>Feature5.feature</DependentUpon>
+    </Compile>
     <Compile Update="Features\Feature4.feature.cs">
       <DependentUpon>Feature4.feature</DependentUpon>
     </Compile>
@@ -39,6 +43,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <SpecFlowFeatureFiles Update="Features\Feature5.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="Features\Feature4.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
