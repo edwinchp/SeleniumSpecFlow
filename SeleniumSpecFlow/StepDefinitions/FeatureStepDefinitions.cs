@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using TechTalk.SpecFlow.Assist;
 
 namespace SeleniumSpecFlow.StepDefinitions
 {
@@ -46,5 +47,24 @@ namespace SeleniumSpecFlow.StepDefinitions
             driver.FindElement(By.XPath("//input[@id='search']")).SendKeys(Keys.Enter);
             Thread.Sleep(1000);
         }
+
+        [Then(@"Search for the following")]
+        public void ThenSearchForTheFollowing(Table table)
+        {
+            var searchCriteria = table.CreateSet<SearchTextTestData>();
+
+            searchCriteria.ToList().ForEach(searchText =>
+            {
+                driver.FindElement(By.XPath("//input[@id='search']")).Clear();
+                driver.FindElement(By.XPath("//input[@id='search3']")).SendKeys(searchText.searchText);
+                driver.FindElement(By.XPath("//input[@id='search']")).SendKeys(Keys.Enter);
+                Thread.Sleep(4000);
+            });
+        }
+    }
+
+    public class SearchTextTestData
+    {
+        public string searchText { get; set; }
     }
 }

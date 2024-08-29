@@ -20,22 +20,22 @@ namespace SeleniumSpecFlow.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Feature3")]
-    public partial class Feature3Feature
+    [NUnit.Framework.DescriptionAttribute("Feature4")]
+    public partial class Feature4Feature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "Feature3.feature"
+#line 1 "Feature4.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Feature3", "Search for the Tests Talk", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Feature4", "Search for the Tests Talk", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -76,19 +76,11 @@ namespace SeleniumSpecFlow.Features
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search for multiple information")]
         [NUnit.Framework.CategoryAttribute("TesterTalk")]
-        [NUnit.Framework.TestCaseAttribute("Selenium", null)]
-        [NUnit.Framework.TestCaseAttribute("Specflow", null)]
-        public virtual void SearchForMultipleInformation(string searchText, string[] exampleTags)
+        public virtual void SearchForMultipleInformation()
         {
-            string[] @__tags = new string[] {
+            string[] tagsOfScenario = new string[] {
                     "TesterTalk"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("searchText", searchText);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for multiple information", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 6
 this.ScenarioInitialize(scenarioInfo);
@@ -116,8 +108,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 8
  testRunner.When("Enter the URL", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "searchText"});
+                table1.AddRow(new string[] {
+                            "Selenium"});
+                table1.AddRow(new string[] {
+                            "Specflow"});
 #line 9
- testRunner.Then(string.Format("Search for the {0} text", searchText), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("Search for the following", ((string)(null)), table1, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
