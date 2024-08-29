@@ -38,5 +38,13 @@ namespace SeleniumSpecFlow.StepDefinitions
             driver.FindElement(By.XPath("//input[@id='search-invalid']")).SendKeys(Keys.Enter);
             Thread.Sleep(1000);
         }
+
+        [Then(@"Search for the (.*) text")]
+        public void ThenSearchFor(string searchText)
+        {
+            driver.FindElement(By.XPath("//input[@id='search']")).SendKeys(searchText);
+            driver.FindElement(By.XPath("//input[@id='search']")).SendKeys(Keys.Enter);
+            Thread.Sleep(1000);
+        }
     }
 }

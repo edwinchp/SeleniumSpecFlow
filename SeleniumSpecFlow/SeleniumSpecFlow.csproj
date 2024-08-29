@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <SpecFlowObsoleteCodeBehindFiles Remove="Features\Feature1 - Copia.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Features\Feature2 - Copy.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Features\Feature3.feature.cs">
+      <DependentUpon>Feature3.feature</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="Features\Feature3.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="Features\Feature2.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
