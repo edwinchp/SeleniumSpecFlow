@@ -2,17 +2,13 @@
 
 namespace SeleniumSpecFlow.Pages
 {
-    internal class ResultPage
+    internal class ResultPage : Page
     {
-        private IWebDriver _driver;
-        public ResultPage(IWebDriver driver)
-        {
-            _driver = driver;
-        }
+        public ResultPage(IWebDriver driver) : base(driver) { }
 
-        internal string GetTitle()
+        internal string GetPageTitle()
         {
-            return _driver.Title;
+            return GetTitle();
         }
     }
 }

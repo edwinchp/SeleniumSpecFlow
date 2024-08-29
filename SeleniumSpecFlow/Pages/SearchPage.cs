@@ -2,19 +2,26 @@
 
 namespace SeleniumSpecFlow.Pages
 {
-    internal class SearchPage
+    internal class SearchPage : Page
     {
-        private IWebDriver _driver;
-        public SearchPage(IWebDriver driver)
+        public SearchPage(IWebDriver driver) : base(driver) { }
+
+        private readonly By _searchBox = By.XPath("//input[@id='search']");
+
+        internal void GoToLandingPage()
         {
-            _driver = driver;
+            GoToUrl("https://youtube.com");
         }
 
-        internal ResultPage SearchText(string text)
+        internal void SearchVideo(string text)
         {
-            _driver.FindElement(By.XPath("//input[@id='search']")).SendKeys(text);
-            _driver.FindElement(By.XPath("//input[@id='search']")).SendKeys(Keys.Enter);
-            return new ResultPage(_driver);
+            Type(_searchBox, text);
+            Type(_searchBox, Keys.Enter);
+        }
+
+        internal void ClearSearchBox()
+        {
+            Clear(_searchBox);
         }
     }
 }

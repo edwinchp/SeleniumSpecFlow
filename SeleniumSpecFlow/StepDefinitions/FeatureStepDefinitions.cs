@@ -7,13 +7,13 @@ namespace SeleniumSpecFlow.StepDefinitions
     [Binding]
     internal sealed class FeatureStepDefinitions
     {
-        private IWebDriver driver;
         private SearchPage searchPage;
         private ResultPage resultPage;
 
         public FeatureStepDefinitions(IWebDriver driver) 
         {
-            this.driver = driver;
+            searchPage = new SearchPage(driver);
+            resultPage = new ResultPage(driver);
         }
 
         [Given(@"Open the browser")]
@@ -24,30 +24,26 @@ namespace SeleniumSpecFlow.StepDefinitions
         [When(@"Enter the URL")]
         public void WhenEnterTheURL()
         {
-            driver.Navigate().GoToUrl("https://youtube.com");
+            searchPage.GoToLandingPage();
         }
 
         [Then(@"Search for the Testers Talk")]
         public void ThenSearchForTheTestersTalk()
         {
-            searchPage = new SearchPage(driver);
-            resultPage = searchPage.SearchText("Testers Talk");
+            searchPage.SearchVideo("Testers Talk");
             Thread.Sleep(3000);
         }
 
         [Then(@"Search for the Testers Talk in a wrong Xpath")]
         public void ThenSearchForTheTestersTalkInAWrongXpath()
         {
-            driver.FindElement(By.XPath("//input[@id='search-invalid']")).SendKeys("Testers Talk");
-            driver.FindElement(By.XPath("//input[@id='search-invalid']")).SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
+            throw new Exception();
         }
 
         [Then(@"Search for the (.*) text")]
         public void ThenSearchFor(string searchText)
         {
-            driver.FindElement(By.XPath("//input[@id='search']")).SendKeys(searchText);
-            driver.FindElement(By.XPath("//input[@id='search']")).SendKeys(Keys.Enter);
+            searchPage.SearchVideo(searchText);
             Thread.Sleep(1000);
         }
 
@@ -59,9 +55,8 @@ namespace SeleniumSpecFlow.StepDefinitions
 
             searchCriteria.ToList().ForEach(searchText =>
             {
-                driver.FindElement(By.XPath("//input[@id='search']")).Clear();
-                driver.FindElement(By.XPath("//input[@id='search3']")).SendKeys(searchText.searchText);
-                driver.FindElement(By.XPath("//input[@id='search']")).SendKeys(Keys.Enter);
+                searchPage.ClearSearchBox();
+                searchPage.SearchVideo(searchText.searchText);
                 Thread.Sleep(4000);
             });
         }
@@ -69,7 +64,7 @@ namespace SeleniumSpecFlow.StepDefinitions
         [Then(@"Validate the title contains ""([^""]*)""")]
         public void ThenValidateTheTitleContains(string text)
         {
-            resultPage.GetTitle().Should().Contain(text);
+            resultPage.GetPageTitle().Should().Contain(text);
         }
 
     }
