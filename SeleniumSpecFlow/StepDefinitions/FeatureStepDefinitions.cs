@@ -26,7 +26,7 @@ namespace SeleniumSpecFlow.StepDefinitions
         [Then(@"Search for the Testers Talk")]
         public void ThenSearchForTheTestersTalk()
         {
-            driver.FindElement(By.XPath("//input[@id='search']")).SendKeys("Testers Talk");
+            driver.FindElement(By.XPath("//input[@id='sear1ch']")).SendKeys("Testers Talk");
             driver.FindElement(By.XPath("//input[@id='search']")).SendKeys(Keys.Enter);
             Thread.Sleep(3000);
         }
