@@ -1,8 +1,7 @@
 ﻿using AventStack.ExtentReports;
-using OpenQA.Selenium;
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports.Reporter.Configuration;
-
+using OpenQA.Selenium;
 namespace SeleniumSpecFlow.Utility
 {
     public class ExtentReport
@@ -41,10 +40,8 @@ namespace SeleniumSpecFlow.Utility
             ITakesScreenshot takesScreenshot = (ITakesScreenshot)driver;
             Screenshot screenshot = takesScreenshot.GetScreenshot();
             string screenshotLocation = Path.Combine(testResultPath, scenarioContext.ScenarioInfo.Title + ".png");
-            //screenshot.SaveAsFile(screenshotLocation, ScreenshotImageFormat.Png);
+            screenshot.SaveAsFile(screenshotLocation);
             return screenshotLocation;
         }
-
-
     }
 }
