@@ -7,8 +7,8 @@ namespace SeleniumSpecFlow.StepDefinitions
     [Binding]
     internal sealed class FeatureStepDefinitions
     {
-        private SearchPage searchPage;
-        private ResultPage resultPage;
+        private readonly SearchPage searchPage;
+        private readonly ResultPage resultPage;
 
         public FeatureStepDefinitions(IWebDriver driver) 
         {

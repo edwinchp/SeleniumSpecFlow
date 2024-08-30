@@ -3,6 +3,7 @@ using AventStack.ExtentReports.Gherkin.Model;
 using BoDi;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using SeleniumSpecFlow.Drivers;
 using SeleniumSpecFlow.Utility;
 
 namespace SeleniumSpecFlow.Hooks
@@ -11,6 +12,7 @@ namespace SeleniumSpecFlow.Hooks
     public sealed class Hooks : ExtentReport
     {
         private readonly IObjectContainer _container;
+
         public Hooks(IObjectContainer container) 
         { 
             _container = container;
@@ -25,9 +27,8 @@ namespace SeleniumSpecFlow.Hooks
         [BeforeScenario(Order = 1)]
         public void FirstBeforeScenario(ScenarioContext scenarioContext)
         {
-            IWebDriver driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            var driverFactory = WebDriverCreator.CreateWebDriver("edge");
+            var driver = driverFactory.CreateWebDriver();
             _container.RegisterInstanceAs<IWebDriver>(driver);
             _scenario = _feature.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
         }

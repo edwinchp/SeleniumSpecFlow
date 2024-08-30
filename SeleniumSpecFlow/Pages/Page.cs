@@ -9,6 +9,7 @@ namespace SeleniumSpecFlow.Pages
         public Page(IWebDriver driver)
         {
             _driver = driver;
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
 
         protected void Type(By ele, string text)
